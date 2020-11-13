@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class PreguntaFragment extends Fragment {
@@ -53,22 +55,29 @@ public class PreguntaFragment extends Fragment {
             categoriaView.setText(category);
             Log.d(TAG, correctAnswer);
             if (incorrectAnswers != null) {
+
+                ArrayList<String> answers = new ArrayList<>(incorrectAnswers);
+                answers.add(correctAnswer);
+                Collections.shuffle(answers);
+
                 //RECORREMOS EL ARREGLO DE STRINGS "RESPUESTAS INCORRECTAS" DE NUESTRA API DE DATOS
-                for (int i = 0; i < incorrectAnswers.size(); i++) {
+                for (int i = 0; i < answers.size(); i++) {
                     switch (i) {
                         case 0:
-                            respuestaUno.setText(incorrectAnswers.get(i));
+                            respuestaUno.setText(answers.get(i));
                             break;
                         case 1:
-                            respuestaDos.setText(incorrectAnswers.get(i));
+                            respuestaDos.setText(answers.get(i));
                             break;
                         case 2:
-                            respuestaTres.setText(incorrectAnswers.get(i));
+                            respuestaTres.setText(answers.get(i));
+                            break;
+                        case 3:
+                            respuestaCuatro.setText(answers.get(i));
                             break;
                     }
                 }
             }
-            respuestaCuatro.setText(correctAnswer);
 
 
             btnConsultaRespuesta.setOnClickListener(new View.OnClickListener() {
